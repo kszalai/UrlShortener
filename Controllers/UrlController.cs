@@ -19,12 +19,19 @@ namespace UrlShortener.Controllers
         [HttpPost]
         public ActionResult<UrlData> Encode(UrlData url)
         {
-            var shortenedUrl = _urlService.Create(url);
-            var newData = new UrlData
+            return new UrlData
             {
-                Url = "https://smol.url/" + shortenedUrl.HashedId
+                Url = "https://smol.url/" + _urlService.Create(url).HashedId
             };
-            return newData;
-        } 
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<UrlData> Decode(string id)
+        {
+            return new UrlData
+            {
+                Url = _urlService.GetByHash(id).Url
+            };
+        }
     }
 }
