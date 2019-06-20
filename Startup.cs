@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UrlShortener.Models;
+using UrlShortener.Services;
 
 namespace UrlShortener
 {
@@ -29,6 +30,8 @@ namespace UrlShortener
             services.Configure<UrlDatabaseSettings>(Configuration.GetSection(nameof(UrlDatabaseSettings)));
 
             services.AddSingleton<IUrlDatabaseSettings>(sp => sp.GetRequiredService<IOptions<UrlDatabaseSettings>>().Value);
+
+            services.AddSingleton<UrlService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
