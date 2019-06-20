@@ -15,10 +15,16 @@ namespace UrlShortener.Controllers
             _urlService = urlService;
         }
 
+        [Route("encode")]
         [HttpPost]
-        public ActionResult<string> Encode([FromBody] UrlData url)
+        public ActionResult<UrlData> Encode(UrlData url)
         {
-            return string.Empty;
+            var shortenedUrl = _urlService.Create(url);
+            var newData = new UrlData
+            {
+                Url = "https://smol.url/" + shortenedUrl.HashedId
+            };
+            return newData;
         } 
     }
 }

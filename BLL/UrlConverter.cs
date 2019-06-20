@@ -22,7 +22,7 @@ namespace UrlShortener.Converter
             char[] reversedString = sb.ToString().ToCharArray();
             Array.Reverse(reversedString);
 
-            return reversedString.ToString();
+            return new string(reversedString);
         }
 
         /// <summary>
